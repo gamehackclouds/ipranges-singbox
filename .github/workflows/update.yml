@@ -43,7 +43,7 @@ jobs:
           sudo wget -4q -nv -O - ${URL_DEB_SING_BOX} > ./sing-box.deb
           sudo dpkg -i ./sing-box.deb && sudo rm -fv ./sing-box.deb
 
-      - name: Fix large file copy ipv4_merged.txt as ipv4.txt for Github fix
+      - name: Gen srs for sing-box
         env:
           LANG: en_US.UTF-8
           CHARSET: UTF-8
@@ -52,3 +52,14 @@ jobs:
           set -euo pipefail
           set -x
           find . -name downloader.sh| sort -h | parallel --will-cite -j $(nproc) echo "script execution '{}'"';' bash {.}.sh
+
+      - name: Commit files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update"
+          file_pattern: '*/*.zip */*/*.zip */*.srs */*/*.srs */*.json.zst */*/*.json.zst'
+          commit_options: "--no-verify"
+          repository: .
+          commit_user_name: github-actions[bot]
+          commit_user_email: github-actions[bot]@users.noreply.github.com
+          commit_author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
