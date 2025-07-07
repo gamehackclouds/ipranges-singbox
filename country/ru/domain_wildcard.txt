@@ -11,8 +11,6 @@
 .mosreg.ru
 .sevastopol.ru
 .sev.ru
-.ru
-.su
 .xn--80adxhks
 .xn--80asehdb
 .xn--80aswg
