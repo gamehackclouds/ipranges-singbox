@@ -122,4 +122,4 @@ rm -f "${HOME_GITHUB}"/"${NAME_SERVICE}"/*.{zst,zip}
 cat "${HOME_GITHUB}"/"${NAME_SERVICE}"/"${NAME_SERVICE}".json | zstd -o "${HOME_GITHUB}"/"${NAME_SERVICE}"/"${NAME_SERVICE}".json.zst && rm -f "${HOME_GITHUB}"/"${NAME_SERVICE}"/"${NAME_SERVICE}".json "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt "${HOME_GITHUB}"/"${NAME_SERVICE}"/ipv4.txt
 
 # Compress srs rules for husi in zip (Android-client)
-zip -9 "${HOME_GITHUB}"/"${NAME_SERVICE}"/"${NAME_SERVICE}".zip "${HOME_GITHUB}"/"${NAME_SERVICE}"/"${NAME_SERVICE}".srs
+cd "${HOME_GITHUB}"/"${NAME_SERVICE}"/ && zip -9 ./"${NAME_SERVICE}".zip ./"${NAME_SERVICE}".srs
