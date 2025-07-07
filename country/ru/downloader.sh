@@ -8,7 +8,7 @@ export NAME_SERVICE=ru
 
 # From my repository ipranges IP-address
 download_ip() {
-    curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/herrbischoff/country-ip-blocks/refs/heads/master/ipv4/$NAME_SERVICE.cidr
+    curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/herrbischoff/country-ip-blocks/refs/heads/master/ipv4/$NAME_SERVICE.cidr https://raw.githubusercontent.com/$NAME_ACCOUNT_GITHUB/ipranges/main/lifestream/ipv4_merged.txt
 }
 
 # From my repository ipranges domain (if any)
