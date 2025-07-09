@@ -11,3 +11,9 @@ All lists are obtained from public sources.
 `SERVICE_NAME.json.zst` – source text for compile rule-set for sing-box.
 
 `SERVICE_NAME.zip` - compressed in zip srs file. It is made for fast, convenient download for husi client (android).
+
+## See also repository:
+
+https://github.com/you-oops-dev/ipranges
+
+https://github.com/you-oops-dev/ipranges-shadowsocks
