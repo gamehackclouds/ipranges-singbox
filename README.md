@@ -8,7 +8,7 @@ All lists are obtained from public sources.
 
 `SERVICE_NAME.srs` – rule-set binary for sing-box.
 
-`SERVICE_NAME.json.zst` – source text for compile rule-set for sing-box.
+`SERVICE_NAME.json.zst` – source text for compile rule-set for sing-box. For view command `zstdcat SERVICE_NAME/SERVICE_NAME.json.zst | less`
 
 `SERVICE_NAME.zip` - compressed in zip srs file. It is made for fast, convenient download for husi client (android).
 
