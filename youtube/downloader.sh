@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-set -x
+#set -euo pipefail
+#set -x
 
 export HOME_GITHUB=$(pwd)
 export NAME_SERVICE=youtube
@@ -13,13 +13,42 @@ download_ip() {
 
 # From my repository ipranges domain (if any)
 download_domain() {
-    curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/$NAME_ACCOUNT_GITHUB/ipranges/main/"$1"/domain.txt
+    curl --max-time 30 --retry-delay 3 --retry 10 -4s -# https://raw.githubusercontent.com/$NAME_ACCOUNT_GITHUB/ipranges/main/"$1"/domain.txt https://raw.githubusercontent.com/antonme/ipnames/refs/heads/master/dns-youtube.txt https://raw.githubusercontent.com/bol-van/zapret-win-bundle/refs/heads/master/zapret-winws/files/list-youtube.txt https://raw.githubusercontent.com/antonme/ipnames/master/ext-dns-youtube.txt https://raw.githubusercontent.com/bol-van/zapret-win-bundle/refs/heads/master/zapret-winws/files/list-youtube.txt https://raw.githubusercontent.com/itdoginfo/allow-domains/refs/heads/main/Services/youtube.lst
 }
 
 download_ip "${NAME_SERVICE}" > "${HOME_GITHUB}"/"${NAME_SERVICE}"/ipv4.txt
 download_domain "${NAME_SERVICE}" > "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt
 
 #Отфильтровать домена дополнительно
+echo "img.youtube.com
+ggpht.com
+ytimg.com
+youtu.be
+youtubei.googleapis.com
+googleusercontent.com
+yt3.ggpht.com
+googlevideo.com
+gstatic.com
+googleapis.com
+googleusercontent.com
+youtube.com
+sponsor.ajay.app
+sponsorblock.hankmccord.dev
+returnyoutubedislike.com
+returnyoutubedislikeapi.com" >> "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt
+dos2unix "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt
+sort "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt | uniq | sponge "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt
+# Prepare domain
+# Delete subdomain in file
+cat "${HOME_GITHUB}"/"${NAME_SERVICE}"/domain.txt | grep -vEe '(.googlevideo.com|.gvt1.com|.uber.com|.youtube.com|.ytimg.com|.google.com|.withgoogle.com|.googleusercontent.com|.metric.gstatic.com|.googleapis.com|.ggpht.com)$' > ${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt
+sort -h ${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt | uniq | sed '/kellykawase/d' | sed '/hatenablog.co/d' | sed '/blogspot/d' | sed '/githubusercontent/d' | sed '/appspot/d' | sed '/kilatiron/d' | sed '/.ru$/d' | sed '/.co$/d' | sed '/.download$/d' | sed '/.yolasite.com$/d' | sed '/.youtube$/d' | sed '/.info$/d' | sed '/.me$/d' | sed '/.be$/d' | sed '/.net$/d' | sed '/.io$/d' | sed '/.ua$/d' | sed '/.cn$/d' | sort | sponge ${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt
+sed -i '/watchv/d' ${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt
+cp -fv ${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt ${HOME_GITHUB}/${NAME_SERVICE}/domain.txt
+
+sed -i 's/^www.//g' ${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt
+sort ${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt | uniq | sponge ${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt
+sed -i 's/^/./' ${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt
+
 
 if [[ -f "${HOME_GITHUB}/${NAME_SERVICE}/ipv4.txt" ]] && [[ -f "${HOME_GITHUB}/${NAME_SERVICE}/domain.txt" ]] && [[ -f "${HOME_GITHUB}/${NAME_SERVICE}/domain_wildcard.txt" ]]; then
     jq -n \
