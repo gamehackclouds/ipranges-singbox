@@ -1,1 +1,0 @@
-Yandex+Yandex Cloud

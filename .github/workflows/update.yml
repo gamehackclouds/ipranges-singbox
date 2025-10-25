@@ -47,7 +47,6 @@ jobs:
         env:
           LANG: en_US.UTF-8
           CHARSET: UTF-8
-          NAME_ACCOUNT_GITHUB: you-oops-dev
         run: |
           set -euo pipefail
           set -x
@@ -57,7 +56,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update"
-          file_pattern: '*/*.zip */*/*.zip */*.srs */*/*.srs */*.json.zst */*/*.json.zst'
+          file_pattern: "*.srs */*.srs"
           commit_options: "--no-verify"
           repository: .
           commit_user_name: github-actions[bot]
